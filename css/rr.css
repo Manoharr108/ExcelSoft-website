@@ -1,0 +1,224 @@
+@charset "utf-8";
+/* CSS Document */
+.row > .column {
+  padding: 0 8px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  float: left;
+  width: 25%;
+}
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+.close:hover, .close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mySlides, .mySlidesui {
+  display: none;
+}
+.cursor {
+  cursor: pointer;
+}
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 150px;
+  width: auto;
+  padding: 12px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+/*  transition: 0.3s ease;*/
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5)
+}
+/* Position the "next button" to the right */
+.prev {
+  border-radius: 0 8px 8px 0;left: -2px;
+}
+.next {
+  right: -2px;
+  border-radius: 8px 0 0 8px;
+}
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover {
+  
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); left: 0;
+}
+.next:hover {
+ 
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); right: 0;
+}
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #666;
+  font-size: 13px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+.caption-container {
+  text-align: center;
+  background-color: black;
+  padding: 2px 16px;
+  color: white;
+}
+.demo {
+  opacity: 0.6;
+}
+.active, .demo:hover {
+  opacity: 1;
+}
+img.hover-shadow {
+  transition: 0.3s;
+}
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-title {
+  margin-bottom: 0
+}
+.nav-tabs .nav-link {
+  background-color: #0f6cbd;
+  color: #fff;
+  border-color: transparent !important;
+  border-bottom-color: #fff;
+  padding: 10px 8px;
+}
+.nav-tabs .nav-link:hover {
+  background-color: #fff;
+  color: #333;
+  border-color: transparent !important;
+  border-bottom-color: #fff;
+}
+.nav-item {
+  display: flex;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.nav-tabs .nav-link {
+  margin-bottom: 0;
+}
+.card-title {
+  color: #0f6cbd;
+}
+@media (min-width: 576px) {}
+@media (min-width: 768px) {
+  .nav-tabs .nav-link {
+    background-color: #0f6cbd;
+    color: #fff;
+    border-color: transparent !important;
+    border-bottom-color: #fff;
+    padding: 10px 15px;
+  }
+}
+@media (min-width: 992px) {}
+@media (min-width: 1200px) {}
+@media (min-width: 1400px) {}
+.rr .nav-item {
+  border-top: 1px dashed rgba(255, 255, 255, 0.30);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.30);
+  padding: 5px 0;
+  flex-direction: column;
+}
+.rr .nav-item a {
+color: rgba(255, 255, 255, 1.00);
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  background-position: left center;
+  padding-left: 30px
+}
+
+.rr .nav-item a:hover {
+   color: rgba(255, 204, 51, 1.00) !important;
+  background-image: url("../image/arrow-right-short.png");
+}
+.rr .nav-item a.active {
+  color: rgba(255, 204, 51, 1.00) !important;
+	 background-image: url("../image/arrow-right-short.png") !important;
+}
+.card[onclick] {
+  cursor: pointer;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)
+}
+.card[onclick]:hover {
+  margin: -1px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15)
+}
+.bg-rr1 {
+  background-color: #06294b;
+  background-image: linear-gradient(#0b3964, #06294b);
+}
+.bg-rr { /*background-color: #0a3055; */ background-image: url("../image/bg-rr.svg") !important;
+  background-repeat: no-repeat;
+  background-size: auto 120%;
+  background-position: bottom center;
+}
+.dnshow {
+  display: none;
+  -webkit-animation: fadeOut 0.9s;
+  animation: fadeOut 0.9s;
+}
+.show {
+  display: block;
+  -webkit-animation: fadeIn 0.9s;
+  animation: fadeIn 0.9s;
+}
+
+.sideMnu{
+  height: 100% !important;
+  overflow: auto !important;
+}
+.sideMnu::-webkit-scrollbar {
+  width: 5px;
+}
+.sideMnu::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+.sideMnu::-webkit-scrollbar-thumb {
+  background: #666666;
+}
+

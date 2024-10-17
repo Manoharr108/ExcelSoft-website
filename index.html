@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>EXCELSOFT - Rewards and Recognition</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/rr.css" rel="stylesheet" />
+    </head>
+    <body class="h-100 d-flex flex-column">
+        <main class="flex-shrink-0">
+            <section class="navigation bg-rr1 bg-rr">
+                <nav class="navbar navbar-dark">
+                    <div class="container-fluid justify-content-between">
+                        <div class="d-flex flex-column flex-md-row flex-wrap">
+                            <a class="navbar-brand" href="#">
+                                <img src="image/ES-White-logo.png" width="auto" height="50px" alt="Excelsoft Logo" />
+                            </a>
+                            <div class="text-white border-start ps-2 ms-1 d-flex flex-column">
+                                <span class="fs-5 fs-md-3 fs-lg-2 fs-xl-1 fw-semibold">Rewards and Recognition Award Winners</span>
+                                <span>An active quarter will be shown here</span>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="container-fluid mt-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <ul class="nav nav-tabs d-flex justify-content-center flex-nowrap align-items-stretch align-content-center border-0" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pob-tab" data-bs-toggle="tab" data-bs-target="#pob-tab-pane" type="button" role="tab" aria-controls="pob-tab-pane" aria-selected="true">Pat on the Back</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="mvp-tab" data-bs-toggle="tab" data-bs-target="#mvp-tab-pane" type="button" role="tab" aria-controls="mvp-tab-pane" aria-selected="false">Most Valuable Player</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="le-tab" data-bs-toggle="tab" data-bs-target="#le-tab-pane" type="button" role="tab" aria-controls="le-tab-pane" aria-selected="false">Extra Miler</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="exl-tab" data-bs-toggle="tab" data-bs-target="#exl-tab-pane" type="button" role="tab" aria-controls="exl-tab-pane" aria-selected="false">ExceLearn</button>
+                            </li>
+                        </ul>
+
+                        <!-- Dropdown for selecting the quarter -->
+                        <select id="quarter-dropdown" class="form-select" style="width: 200px;">
+                            <!-- Quarters will be dynamically populated here -->
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container-fluid tab-content pb-5" id="myTabContent">
+                <!-- Pat on the Back Tab -->
+                <div class="tab-pane fade show active" id="pob-tab-pane" role="tabpanel" aria-labelledby="pob-tab" tabindex="0">
+                    <div class="pob-container">
+                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+                            The Pat on the Back (POB) is given in recognition of the best performer in each Business Unit. It recognizes the effort made by the individual during a task or project.
+                        </p>
+                        <p class="text-center display-6 mb-3">Congratulations to the winners of "Pat on the Back Award"</p>
+                        
+                        <!-- Dynamic content will be injected here -->
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="pob-winners">
+                            <!-- Cards will be injected using JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Most Valuable Player Tab -->
+                <div class="tab-pane fade" id="mvp-tab-pane" role="tabpanel" aria-labelledby="mvp-tab" tabindex="0">
+                    <div class="mvp-container">
+                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+                            The Most Valuable Player (MVP) award recognizes an employee who has demonstrated exceptional performance and leadership in their role.
+                        </p>
+                        <p class="text-center display-6 mb-3">Congratulations to the winners of "Most Valuable Player Award"</p>
+                        
+                        <!-- Dynamic content will be injected here -->
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="mvp-winners">
+                            <!-- Cards will be injected using JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra Miler Tab -->
+                <div class="tab-pane fade" id="le-tab-pane" role="tabpanel" aria-labelledby="le-tab" tabindex="0">
+                    <div class="le-container">
+                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+                            The Extra Miler award is for recognizing employees who have exhibited outstanding leadership qualities.
+                        </p>
+                        <p class="text-center display-6 mb-3">Congratulations to the winners of "Extra Miler Award"</p>
+                        
+                        <!-- Dynamic content will be injected here -->
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="em-winners">
+                            <!-- Cards will be injected using JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ExceLearn Tab -->
+                <div class="tab-pane fade" id="exl-tab-pane" role="tabpanel" aria-labelledby="exl-tab" tabindex="0">
+                    <div class="exl-container">
+                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+                            The ExceLearn award recognizes the continuous learning and upskilling of employees in various professional domains.
+                        </p>
+                        <p class="text-center display-6 mb-3">Congratulations to the winners of "ExceLearn Award"</p>
+                        
+                        <!-- Dynamic content will be injected here -->
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="exl-winners">
+                            <!-- Cards will be injected using JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bootstrap and JS Files -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/app.js"></script> <!-- Your custom script for dynamic fetching -->
+    </body>
+</html>
