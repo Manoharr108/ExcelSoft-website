@@ -111,8 +111,77 @@
                 </div>
             </div>
         </main>
-
-        <!-- Bootstrap and JS Files -->
+        
+        <!-- Employee Details Modal -->
+<!-- <div id="employeeModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <h5 class="modal-title" id="employeeModalTitle">Employee Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img id="employeeModalImage" src="" alt="Employee Photo" class="img-fluid rounded-3 mb-3">
+            </div>
+            <div class="col-md-8">
+              <h5 id="employeeModalName" class="mb-1"></h5>
+              <p id="employeeModalRole" class="text-muted mb-2"></p>
+              <p id="employeeModalDescription"></p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="employeeModalLabel">Employee Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4 pb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="position-relative">
+                            <img id="employeeModalImage" src="" alt="" class="img-fluid rounded shadow-sm w-100" style="object-fit: cover; height: 300px;">
+                            <div class="position-absolute bottom-0 start-0 end-0 p-3 text-white" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
+                                <h4 id="employeeModalName" class="mb-1"></h4>
+                                <p id="employeeModalRole" class="mb-0 text-white-50"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            <h6 class="text-primary mb-3">Achievements & Remarks</h6>
+                            <p id="employeeModalDescription" class="text-muted"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 justify-content-between bg-light rounded-bottom">
+                <!-- <button type="button" class="btn btn-primary d-flex align-items-center" id="prevEmployee" onclick="navigateEmployee(-1)">
+                    <i class="bi bi-chevron-left me-2"></i> Previous
+                </button> -->
+                <span class="text-muted" id="employeeCounter"></span>
+                <!-- <button type="button" class="btn btn-primary d-flex align-items-center" id="nextEmployee" onclick="navigateEmployee(1)">
+                    Next <i class="bi bi-chevron-right ms-2"></i>
+                </button> -->
+                <div class="arrows">
+                    <a class="prev text-decoration-none " onclick="navigateEmployee(-1)" id="prevEmployee" class="btn btn-primary d-flex align-items-center" style="display: visible;">&#10094;</a> 
+                    <a class="next text-decoration-none" onclick="navigateEmployee(1)" id="nextEmployee" class="btn btn-primary d-flex align-items-center" style="display: visible;">&#10095;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/app.js"></script> <!-- Your custom script for dynamic fetching -->
     </body>
