@@ -1,30 +1,39 @@
-// Global variables to track current state
 let categoryWinners = {
     'pob-winners': [],
     'mvp-winners': [],
     'em-winners': [],
     'exl-winners': []
 };
+
 let currentCategory = '';
 let currentWinnerIndex = 0;
 
+function showLoader() {
+    document.getElementById('loader').classList.remove('d-none');
+}
+
+function hideLoader() {
+    document.getElementById('loader').classList.add('d-none');
+}
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     fetchEmployees();
     document.getElementById('quarter-dropdown').addEventListener('change', (event) => {
         const selectedQuarter = event.target.value;
         fetchEmployeesByQuarter(selectedQuarter);
+        document.getElementById("active-quarter").innerHTML=`<div id="active-quarter" >${selectedQuarter}</div></div>
+        `
     });
 });
 
 function fetchEmployees() {
-    fetch('http://localhost:9000/employees')
+    showLoader(); 
+    fetch('https://excel-soft-nodejs.vercel.app/achievers-employees')
         .then(response => response.json())
         .then(data => { 
             const employees = data.emp || [];
-            const quarters = [...new Set(employees.map(emp => emp.quater))];
+            const quarters = [...new Set(employees.map(emp => emp.quarter))];
             
-            // Sort quarters in descending order
             quarters.sort((a, b) => {
                 const [yearA, quarterA] = a.split('Q');
                 const [yearB, quarterB] = b.split('Q');
@@ -35,7 +44,8 @@ function fetchEmployees() {
             populateQuarterDropdown(quarters);
             fetchEmployeesForAllCategories(latestQuarter);
         })
-        .catch(error => console.error('Error fetching employees:', error));
+        .catch(error => console.error('Error fetching employees:', error))
+        .finally(() => hideLoader());
 }
 
 function populateQuarterDropdown(quarters) {
@@ -52,11 +62,13 @@ function populateQuarterDropdown(quarters) {
     });
 }
 
-function fetchEmployeesForAllCategories(quarter) {
+async function fetchEmployeesForAllCategories(quarter) {
+    showLoader();
     const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
-
+    document.getElementById("active-quarter").innerHTML=`<div id="active-quarter" >${quarter}</div></div>
+        `
     categories.forEach(category => {
-        fetch(`http://localhost:9000/emp/${category}/${quarter}`)
+        fetch(`https://excel-soft-nodejs.vercel.app/emp/${category}/${quarter}`)
             .then(response => response.json())
             .then(data => {
                 const employees = data;
@@ -65,26 +77,44 @@ function fetchEmployeesForAllCategories(quarter) {
                     populateWinners(employees, containerId);
                 }
             })
-            .catch(error => console.error(`Error fetching employees for ${category}:`, error));
+            .catch(error => console.error(`Error fetching employees for ${category}:`, error))
+            .finally(() => hideLoader());
     });
 }
 
 function fetchEmployeesByQuarter(quarter) {
-    const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
+    showLoader();
+    resetToFirstTab();
 
+    const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
+    document.getElementById('active-quarter').value = "quarter";
     categories.forEach(category => {
-        fetch(`http://localhost:9000/emp/${category}/${quarter}`)
+        fetch(`https://excel-soft-nodejs.vercel.app/emp/${category}/${quarter}`)
             .then(response => response.json())
             .then(data => {
-                const employees = data;
-                let containerId = getCategoryContainerId(category);
+                const containerId = getCategoryContainerId(category);
                 if (containerId) {
-                    populateWinners(employees, containerId);
+                    populateWinners(data, containerId);
                 }
             })
-            .catch(error => console.error(`Error fetching employees for ${category}:`, error));
+            .catch(error => console.error(`Error fetching employees for category "${category}" in quarter "${quarter}":`, error))
+            .finally(() => hideLoader());
     });
 }
+
+function resetToFirstTab() {
+    const firstTabButton = document.querySelector('.nav-tabs .nav-link:first-child');
+    const firstTabContent = document.querySelector('.tab-content .tab-pane:first-child');
+
+    if (firstTabButton && firstTabContent) {
+        document.querySelectorAll('.nav-tabs .nav-link').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-content .tab-pane').forEach(pane => pane.classList.remove('active', 'show'));
+
+        firstTabButton.classList.add('active');
+        firstTabContent.classList.add('active', 'show');
+    }
+}
+
 
 function getCategoryContainerId(category) {
     switch (category) {

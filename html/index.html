@@ -4,21 +4,27 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>EXCELSOFT - Rewards and Recognition</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <link href="css/rr.css" rel="stylesheet" />
+        <link href="../css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../css/rr.css" rel="stylesheet" />
     </head>
     <body class="h-100 d-flex flex-column">
+        <div id="loader" class="loader-overlay d-none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        
         <main class="flex-shrink-0">
             <section class="navigation bg-rr1 bg-rr">
                 <nav class="navbar navbar-dark">
                     <div class="container-fluid justify-content-between">
                         <div class="d-flex flex-column flex-md-row flex-wrap">
                             <a class="navbar-brand" href="#">
-                                <img src="image/ES-White-logo.png" width="auto" height="50px" alt="Excelsoft Logo" />
+                                <img src="../image/ES-White-logo.png" width="auto" height="50px" alt="Excelsoft Logo" />
                             </a>
                             <div class="text-white border-start ps-2 ms-1 d-flex flex-column">
                                 <span class="fs-5 fs-md-3 fs-lg-2 fs-xl-1 fw-semibold">Rewards and Recognition Award Winners</span>
-                                <span>An active quarter will be shown here</span>
+                                <div id="active-quarter" onclick="play()">quarter</div>
                             </div>
                         </div>
                     </div>
@@ -73,9 +79,7 @@
                         </p>
                         <p class="text-center display-6 mb-3">Congratulations to the winners of "Most Valuable Player Award"</p>
                         
-                        <!-- Dynamic content will be injected here -->
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="mvp-winners">
-                            <!-- Cards will be injected using JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -112,34 +116,9 @@
             </div>
         </main>
         
-        <!-- Employee Details Modal -->
-<!-- <div id="employeeModal" class="modal fade" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content"> 
-        <div class="modal-header">
-          <h5 class="modal-title" id="employeeModalTitle">Employee Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img id="employeeModalImage" src="" alt="Employee Photo" class="img-fluid rounded-3 mb-3">
-            </div>
-            <div class="col-md-8">
-              <h5 id="employeeModalName" class="mb-1"></h5>
-              <p id="employeeModalRole" class="text-muted mb-2"></p>
-              <p id="employeeModalDescription"></p>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+ 
   
-  <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+  <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
@@ -166,13 +145,7 @@
                 </div>
             </div>
             <div class="modal-footer border-top-0 justify-content-between bg-light rounded-bottom">
-                <!-- <button type="button" class="btn btn-primary d-flex align-items-center" id="prevEmployee" onclick="navigateEmployee(-1)">
-                    <i class="bi bi-chevron-left me-2"></i> Previous
-                </button> -->
                 <span class="text-muted" id="employeeCounter"></span>
-                <!-- <button type="button" class="btn btn-primary d-flex align-items-center" id="nextEmployee" onclick="navigateEmployee(1)">
-                    Next <i class="bi bi-chevron-right ms-2"></i>
-                </button> -->
                 <div class="arrows">
                     <a class="prev text-decoration-none " onclick="navigateEmployee(-1)" id="prevEmployee" class="btn btn-primary d-flex align-items-center" style="display: visible;">&#10094;</a> 
                     <a class="next text-decoration-none" onclick="navigateEmployee(1)" id="nextEmployee" class="btn btn-primary d-flex align-items-center" style="display: visible;">&#10095;</a>
@@ -182,7 +155,7 @@
     </div>
 </div>
   
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/app.js"></script> <!-- Your custom script for dynamic fetching -->
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/app.js"></script> 
     </body>
 </html>
