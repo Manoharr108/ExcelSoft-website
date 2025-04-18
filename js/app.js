@@ -32,8 +32,8 @@ function fetchEmployees() {
     fetch('http://localhost:9000/achievers-employees')
         .then(response => response.json())
         .then(data => { 
-            const employees = data.emp || [];
-            const quarters = [...new Set(employees.map(emp => emp.quarter))];
+            const employees = (data.emp || []).filter(emp => emp.epublic===true);
+            const quarters = [...new Set(employees.map(emp  => emp.quarter))];
             
             quarters.sort((a, b) => {
                 const [yearA, quarterA] = a.split('Q');
@@ -163,17 +163,18 @@ function populateWinners(winners, containerId) {
         return;
     }
     categoryWinners[containerId].forEach((winner, i) => {
-      
-            container.innerHTML += `
-            <div class="col">
-            <div class="card h-100" onclick="openEmployeeModal('${containerId}', ${i})">
-            <img src="${winner.photo}" class="card-img-top" alt="${winner.name}" />
-            <div class="card-body py-2">
-            <h5 class="card-title">${winner.name}</h5>
-            <p class="card-text mb-0"><small class="text-body-secondary">${winner.role}</small></p>
-            </div>
-            </div>
-            </div>`;
+            if(winner.epublic){
+                container.innerHTML += `
+                <div class="col">
+                <div class="card h-100" onclick="openEmployeeModal('${containerId}', ${i})">
+                <img src="${winner.photo}" class="card-img-top" alt="${winner.name}" />
+                <div class="card-body py-2">
+                <h5 class="card-title">${winner.name}</h5>
+                <p class="card-text mb-0"><small class="text-body-secondary">${winner.role}</small></p>
+                </div>
+                </div>
+                </div>`;
+                }
             
     });
 }
