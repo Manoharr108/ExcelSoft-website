@@ -69,7 +69,7 @@ async function fetchEmployeesForAllCategories(quarter) {
     document.getElementById("active-quarter").innerHTML=`<div id="active-quarter" >${quarter}</div></div>
         `
     categories.forEach(category => {
-        fetch(`https://excel-soft-nodejs.vercel.app/emp/${category}/${quarter}`) 
+        // fetch(`https://excel-soft-nodejs.vercel.app/emp/${category}/${quarter}`) 
         fetch(`http://localhost:9000/emp/${category}/${quarter}`) 
             .then(response => response.json())
             .then(data => {
