@@ -1,3 +1,4 @@
+
 let categoryWinners = {
     'pob-winners': [],
     'mvp-winners': [],
@@ -8,6 +9,7 @@ let categoryWinners = {
 let currentCategory = '';
 let currentWinnerIndex = 0;
 
+
 function showLoader() {
     document.getElementById('loader').classList.remove('d-none');
 }
@@ -15,25 +17,24 @@ function showLoader() {
 function hideLoader() {
     document.getElementById('loader').classList.add('d-none');
 }
+
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     fetchEmployees();
     document.getElementById('quarter-dropdown').addEventListener('change', (event) => {
         const selectedQuarter = event.target.value;
         fetchEmployeesByQuarter(selectedQuarter);
-        document.getElementById("active-quarter").innerHTML=`<div id="active-quarter" >${selectedQuarter}</div></div>
-        `
+        document.getElementById("active-quarter").innerHTML = `<div id="active-quarter">${selectedQuarter}</div>`;
     });
 });
 
 function fetchEmployees() {
-    showLoader(); 
-    // fetch('https://excel-soft-nodejs.vercel.app/achievers-employees')
+    showLoader();
     fetch('http://localhost:9000/achievers-employees')
         .then(response => response.json())
         .then(data => { 
-            const employees = (data.emp || []).filter(emp => emp.epublic===true);
-            const quarters = [...new Set(employees.map(emp  => emp.quarter))];
+            const employees = (data.emp || []).filter(emp => emp.epublic === true);
+            const quarters = [...new Set(employees.map(emp => emp.quarter))];
             
             quarters.sort((a, b) => {
                 const [yearA, quarterA] = a.split('Q');
@@ -66,11 +67,10 @@ function populateQuarterDropdown(quarters) {
 async function fetchEmployeesForAllCategories(quarter) {
     showLoader();
     const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
-    document.getElementById("active-quarter").innerHTML=`<div id="active-quarter" >${quarter}</div></div>
-        `
+    document.getElementById("active-quarter").innerHTML = `<div id="active-quarter">${quarter}</div>`;
+    
     categories.forEach(category => {
-        // fetch(`https://excel-soft-nodejs.vercel.app/emp/${category}/${quarter}`) 
-        fetch(`http://localhost:9000/emp/${category}/${quarter}`) 
+        fetch(`http://localhost:9000/emp/${category}/${quarter}`)
             .then(response => response.json())
             .then(data => {
                 const employees = data;
@@ -91,7 +91,7 @@ function fetchEmployeesByQuarter(quarter) {
     const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
     document.getElementById('active-quarter').value = "quarter";
     categories.forEach(category => {
-        fetch(`https://excel-soft-nodejs.vercel.app/emp/${category}/${quarter}`)
+        fetch(`http://localhost:9000/emp/${category}/${quarter}`)
             .then(response => response.json())
             .then(data => {
                 const containerId = getCategoryContainerId(category);
@@ -117,65 +117,53 @@ function resetToFirstTab() {
     }
 }
 
-
 function getCategoryContainerId(category) {
     switch (category) {
-        case 'Pat on the back':
-            return 'pob-winners';
-        case 'Most valuable Player':
-            return 'mvp-winners';
-        case 'Extra Miler':
-            return 'em-winners';
-        case 'Excelearn':
-            return 'exl-winners';
-        default:
-            console.error(`Unknown category: ${category}`);
-            return null;
+        case 'Pat on the back': return 'pob-winners';
+        case 'Most valuable Player': return 'mvp-winners';
+        case 'Extra Miler': return 'em-winners';
+        case 'Excelearn': return 'exl-winners';
+        default: return null;
     }
 }
 
 function getCategoryTitle(containerId) {
     switch (containerId) {
-        case 'pob-winners':
-            return 'Pat on the Back';
-        case 'mvp-winners':
-            return 'Most Valuable Player';
-        case 'em-winners':
-            return 'Extra Miler';
-        case 'exl-winners':
-            return 'Excelearn';
-        default:
-            return 'Employee Details';
+        case 'pob-winners': return 'Pat on the Back';
+        case 'mvp-winners': return 'Most Valuable Player';
+        case 'em-winners': return 'Extra Miler';
+        case 'exl-winners': return 'Excelearn';
+        default: return 'Employee Details';
     }
 }
 
 function populateWinners(winners, containerId) {
     const container = document.getElementById(containerId);
-    if(container.innerHTML != '') {
-        container.innerHTML = '';
-    }
+    container.innerHTML = '';
 
-    // Store winners for this specific category
     categoryWinners[containerId] = winners.filter(winner => winner.name);
 
     if (winners.length < 2) {   
         container.innerHTML = '<p class="text-center">No winners for this category.</p>';
         return;
     }
+
     categoryWinners[containerId].forEach((winner, i) => {
-            if(winner.epublic){
-                container.innerHTML += `
-                <div class="col">
+        if(winner.epublic){
+            container.innerHTML += `
+            <div class="col">
                 <div class="card h-100" onclick="openEmployeeModal('${containerId}', ${i})">
-                <img src="${winner.photo}" class="card-img-top" alt="${winner.name}" />
-                <div class="card-body py-2">
-                <h5 class="card-title">${winner.name}</h5>
-                <p class="card-text mb-0"><small class="text-body-secondary">${winner.role}</small></p>
+                    <img src="${getEmployeePhotoUrl(winner.empid)}"
+                         class="card-img-top" 
+                         alt="${winner.name}"
+                         onerror="this.src='${getDefaultPhotoUrl()}'" />
+                    <div class="card-body py-2">
+                        <h5 class="card-title">${winner.name}</h5>
+                        <p class="card-text mb-0"><small class="text-body-secondary">${winner.role}</small></p>
+                    </div>
                 </div>
-                </div>
-                </div>`;
-                }
-            
+            </div>`;
+        }
     });
 }
 
@@ -184,46 +172,31 @@ function openEmployeeModal(containerId, index) {
     currentWinnerIndex = index;
     const winner = categoryWinners[containerId][currentWinnerIndex];
     
-    const categoryTitle = getCategoryTitle(containerId);
-    document.getElementById('employeeModalLabel').textContent = categoryTitle;
-    
+    document.getElementById('employeeModalLabel').textContent = getCategoryTitle(containerId);
     updateModalContent(winner);
     updateNavigationButtons();
     
-    const employeeModal = new bootstrap.Modal(document.getElementById('employeeModal'));
-    employeeModal.show();
+    new bootstrap.Modal(document.getElementById('employeeModal')).show();
 }
 
 function updateModalContent(winner) {
-    document.getElementById('employeeModalImage').src = winner.photo;
+    const modalImage = document.getElementById('employeeModalImage');
+    modalImage.src = getEmployeePhotoUrl(winner.empid);
+    modalImage.onerror = () => modalImage.src = getDefaultPhotoUrl();
+    
     document.getElementById('employeeModalName').textContent = winner.name;
     document.getElementById('employeeModalRole').textContent = winner.role;
     document.getElementById('employeeModalDescription').textContent = winner.remarks || "No remarks available";
 }
 
 function updateNavigationButtons() {
-    document.getElementById("prevEmployee").style.display="block"
-    document.getElementById("nextEmployee").style.display="block"
     const prevButton = document.getElementById('prevEmployee');
     const nextButton = document.getElementById('nextEmployee');
-    const counter = document.getElementById('employeeCounter');
-    
     const currentWinners = categoryWinners[currentCategory];
-    
-    if(currentWinnerIndex===0)
-    document.getElementById("prevEmployee").style.display="none"
-else{
 
-}
-    if(currentWinnerIndex === currentWinners.length - 1)
-    document.getElementById("nextEmployee").style.display="none"
-else{
-
-}
-    prevButton.disabled = currentWinnerIndex === 0;
-    nextButton.disabled = currentWinnerIndex === currentWinners.length - 1;
-
-    counter.textContent = `${currentWinnerIndex + 1} of ${currentWinners.length}`;
+    prevButton.style.display = currentWinnerIndex === 0 ? 'none' : 'block';
+    nextButton.style.display = currentWinnerIndex === currentWinners.length - 1 ? 'none' : 'block';
+    document.getElementById('employeeCounter').textContent = `${currentWinnerIndex + 1} of ${currentWinners.length}`;
 }
 
 function navigateEmployee(direction) {
@@ -231,22 +204,16 @@ function navigateEmployee(direction) {
     const currentWinners = categoryWinners[currentCategory];
     
     if (currentWinnerIndex < 0) currentWinnerIndex = 0;
-    if (currentWinnerIndex >= currentWinners.length) {
-        currentWinnerIndex = currentWinners.length - 1;
-    }
+    if (currentWinnerIndex >= currentWinners.length) currentWinnerIndex = currentWinners.length - 1;
     
-    const winner = currentWinners[currentWinnerIndex];
-    updateModalContent(winner);
+    updateModalContent(currentWinners[currentWinnerIndex]);
     updateNavigationButtons();
 }
 
 document.addEventListener('keydown', (event) => {
     const modal = document.getElementById('employeeModal');
     if (modal.classList.contains('show')) {
-        if (event.key === 'ArrowLeft') {
-            navigateEmployee(-1);
-        } else if (event.key === 'ArrowRight') {
-            navigateEmployee(1);
-        }
+        if (event.key === 'ArrowLeft') navigateEmployee(-1);
+        if (event.key === 'ArrowRight') navigateEmployee(1);
     }
 });
