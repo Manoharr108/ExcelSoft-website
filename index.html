@@ -1,193 +1,422 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>EXCELSOFT - Rewards and Recognition</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <link href="css/rr.css" rel="stylesheet" />
-    </head>
-    <body class="h-100 d-flex flex-column">
-        <div id="loader" class="loader-overlay d-none">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXCELSOFT - Rewards and Recognition</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/rr.css" rel="stylesheet" />
+  </head>
+  <body class="h-100 d-flex flex-column">
+    <div id="loader" class="loader-overlay d-none">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <main class="flex-shrink-0">
+      <section class="navigation bg-rr1 bg-rr">
+        <nav class="navbar navbar-dark">
+          <div class="container-fluid justify-content-between">
+            <div class="d-flex flex-column flex-md-row flex-wrap">
+              <a class="navbar-brand" href="#">
+                <img
+                  src="image/ES-White-logo.png"
+                  width="auto"
+                  height="50px"
+                  alt="Excelsoft Logo"
+                />
+              </a>
+              <div class="text-white border-start ps-2 ms-1 d-flex flex-column">
+                <span class="fs-5 fs-md-3 fs-lg-2 fs-xl-1 fw-semibold"
+                  >Rewards and Recognition Award Winners</span
+                >
+                <div id="active-quarter" onclick="play()">quarter</div>
+              </div>
             </div>
+          </div>
+        </nav>
+
+        <div class="container-fluid mt-3">
+          <div class="row align-items-center justify-content-between">
+            <!-- Left Side: Tabs -->
+            <div class="col-12 col-md-9 mb-3 mb-md-0">
+              <ul
+                class="nav nav-tabs flex-wrap border-0"
+                id="myTab"
+                role="tablist"
+              >
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="pob-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#pob-tab-pane"
+                    type="button"
+                    role="tab"
+                  >
+                    Pat on the Back
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="mvp-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#mvp-tab-pane"
+                    type="button"
+                    role="tab"
+                  >
+                    Most Valuable Player
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="le-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#le-tab-pane"
+                    type="button"
+                    role="tab"
+                  >
+                    Extra Miler
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="exl-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#exl-tab-pane"
+                    type="button"
+                    role="tab"
+                  >
+                    ExceLearn
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right Side: Dropdown + Hamburger -->
+            <div
+              class="col-12 col-md-3 d-flex justify-content-md-end align-items-center gap-2"
+            >
+              <!-- Quarter Dropdown -->
+              <select
+                id="quarter-dropdown"
+                class="form-select"
+                style="min-width: 150px"
+              >
+                <!-- Options populated dynamically -->
+              </select>
+
+              <!-- Hamburger -->
+              <button
+                class="btn p-2 border-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#quickLinksMenu"
+                aria-controls="quickLinksMenu"
+              >
+                <span class="navbar-toggler-icon custom-toggler-white"></span>
+              </button>
+            </div>
+          </div>
         </div>
-        
-        
-        <main class="flex-shrink-0">
-            <section class="navigation bg-rr1 bg-rr">
-                <nav class="navbar navbar-dark">
-                    <div class="container-fluid justify-content-between">
-                        <div class="d-flex flex-column flex-md-row flex-wrap">
-                            <a class="navbar-brand" href="#">
-                                <img src="image/ES-White-logo.png" width="auto" height="50px" alt="Excelsoft Logo" />
-                            </a>
-                            <div class="text-white border-start ps-2 ms-1 d-flex flex-column">
-                                <span class="fs-5 fs-md-3 fs-lg-2 fs-xl-1 fw-semibold">Rewards and Recognition Award Winners</span>
-                                <div id="active-quarter" onclick="play()">quarter</div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+      </section>
 
-              <div class="container-fluid mt-3">
-  <div class="row align-items-center justify-content-between">
+      <div class="container-fluid tab-content pb-5" id="myTabContent">
+        <!-- Pat on the Back Tab -->
+        <div
+          class="tab-pane fade show active"
+          id="pob-tab-pane"
+          role="tabpanel"
+          aria-labelledby="pob-tab"
+          tabindex="0"
+        >
+          <div class="pob-container">
+            <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+              The Pat on the Back (POB) is given in recognition of the best
+              performer in each Business Unit. It recognizes the effort made by
+              the individual during a task or project.
+            </p>
+            <p class="text-center display-6 mb-3">
+              Congratulations to the winners of "Pat on the Back Award"
+            </p>
 
-    <!-- Left Side: Tabs -->
-    <div class="col-12 col-md-9 mb-3 mb-md-0">
-      <ul class="nav nav-tabs flex-wrap border-0" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pob-tab" data-bs-toggle="tab" data-bs-target="#pob-tab-pane" type="button" role="tab">Pat on the Back</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="mvp-tab" data-bs-toggle="tab" data-bs-target="#mvp-tab-pane" type="button" role="tab">Most Valuable Player</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="le-tab" data-bs-toggle="tab" data-bs-target="#le-tab-pane" type="button" role="tab">Extra Miler</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="exl-tab" data-bs-toggle="tab" data-bs-target="#exl-tab-pane" type="button" role="tab">ExceLearn</button>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Right Side: Dropdown + Hamburger -->
-    <div class="col-12 col-md-3 d-flex justify-content-md-end align-items-center gap-2">
-      <!-- Quarter Dropdown -->
-      <select id="quarter-dropdown" class="form-select" style="min-width: 150px;">
-        <!-- Options populated dynamically -->
-      </select>
-
-      <!-- Hamburger -->
-      <button class="btn p-2 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#quickLinksMenu" aria-controls="quickLinksMenu">
-        <span class="navbar-toggler-icon custom-toggler-white"></span>
-      </button>
-    </div>
-
-  </div>
-</div>
-
-
-            </section>
-
-            <div class="container-fluid tab-content pb-5" id="myTabContent">
-                <!-- Pat on the Back Tab -->
-                <div class="tab-pane fade show active" id="pob-tab-pane" role="tabpanel" aria-labelledby="pob-tab" tabindex="0">
-                    <div class="pob-container">
-                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
-                            The Pat on the Back (POB) is given in recognition of the best performer in each Business Unit. It recognizes the effort made by the individual during a task or project.
-                        </p>
-                        <p class="text-center display-6 mb-3">Congratulations to the winners of "Pat on the Back Award"</p>
-                        
-                        <!-- Dynamic content will be injected here -->
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="pob-winners">
-                            <!-- Cards will be injected using JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Most Valuable Player Tab -->
-                <div class="tab-pane fade" id="mvp-tab-pane" role="tabpanel" aria-labelledby="mvp-tab" tabindex="0">
-                    <div class="mvp-container">
-                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
-                            The Most Valuable Player (MVP) award recognizes an employee who has demonstrated exceptional performance and leadership in their role.
-                        </p>
-                        <p class="text-center display-6 mb-3">Congratulations to the winners of "Most Valuable Player Award"</p>
-                        
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="mvp-winners">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Extra Miler Tab -->
-                <div class="tab-pane fade" id="le-tab-pane" role="tabpanel" aria-labelledby="le-tab" tabindex="0">
-                    <div class="le-container">
-                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
-                            The Extra Miler award is for recognizing employees who have exhibited outstanding leadership qualities.
-                        </p>
-                        <p class="text-center display-6 mb-3">Congratulations to the winners of "Extra Miler Award"</p>
-                        
-                        <!-- Dynamic content will be injected here -->
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="em-winners">
-                            <!-- Cards will be injected using JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ExceLearn Tab -->
-                <div class="tab-pane fade" id="exl-tab-pane" role="tabpanel" aria-labelledby="exl-tab" tabindex="0">
-                    <div class="exl-container">
-                        <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
-                            The ExceLearn award recognizes the continuous learning and upskilling of employees in various professional domains.
-                        </p>
-                        <p class="text-center display-6 mb-3">Congratulations to the winners of "ExceLearn Award"</p>
-                        
-                        <!-- Dynamic content will be injected here -->
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="exl-winners">
-                            <!-- Cards will be injected using JavaScript -->
-                        </div>
-                    </div>
-                </div>
+            <!-- Dynamic content will be injected here -->
+            <div
+              class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
+              id="pob-winners"
+            >
+              <!-- Cards will be injected using JavaScript -->
             </div>
-        </main>
-        
- 
-  
-  <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+          </div>
+        </div>
+
+        <!-- Most Valuable Player Tab -->
+        <div
+          class="tab-pane fade"
+          id="mvp-tab-pane"
+          role="tabpanel"
+          aria-labelledby="mvp-tab"
+          tabindex="0"
+        >
+          <div class="mvp-container">
+            <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+              The Most Valuable Player (MVP) award recognizes an employee who
+              has demonstrated exceptional performance and leadership in their
+              role.
+            </p>
+            <p class="text-center display-6 mb-3">
+              Congratulations to the winners of "Most Valuable Player Award"
+            </p>
+
+            <div
+              class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
+              id="mvp-winners"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Extra Miler Tab -->
+        <div
+          class="tab-pane fade"
+          id="le-tab-pane"
+          role="tabpanel"
+          aria-labelledby="le-tab"
+          tabindex="0"
+        >
+          <div class="le-container">
+            <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+              The Extra Miler award is for recognizing employees who have
+              exhibited outstanding leadership qualities.
+            </p>
+            <p class="text-center display-6 mb-3">
+              Congratulations to the winners of "Extra Miler Award"
+            </p>
+
+            <!-- Dynamic content will be injected here -->
+            <div
+              class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
+              id="em-winners"
+            >
+              <!-- Cards will be injected using JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ExceLearn Tab -->
+        <div
+          class="tab-pane fade"
+          id="exl-tab-pane"
+          role="tabpanel"
+          aria-labelledby="exl-tab"
+          tabindex="0"
+        >
+          <div class="exl-container">
+            <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+              The ExceLearn award recognizes the continuous learning and
+              upskilling of employees in various professional domains.
+            </p>
+            <p class="text-center display-6 mb-3">
+              Congratulations to the winners of "ExceLearn Award"
+            </p>
+
+            <!-- Dynamic content will be injected here -->
+            <div
+              class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
+              id="exl-winners"
+            >
+              <!-- Cards will be injected using JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="modal fade"
+      id="employeeModal"
+      tabindex="-1"
+      aria-labelledby="employeeModalLabel"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-                <h5 class="modal-title" id="employeeModalLabel">Employee Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body px-4 pb-4">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="position-relative">
-                            <img id="employeeModalImage" src="" alt="" class="img-fluid rounded shadow-sm w-100" style="object-fit: cover; height: 300px;">
-                            <div class="position-absolute bottom-0 start-0 end-0 p-3 text-white" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
-                                <h4 id="employeeModalName" class="mb-1"></h4>
-                                <p id="employeeModalRole" class="mb-0 text-white-50"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="p-3">
-                            <h6 class="text-primary mb-3">Achievements & Remarks</h6>
-                            <p id="employeeModalDescription" class="text-muted"></p>
-                        </div>
-                    </div>
+          <div class="modal-header border-bottom-0">
+            <h5 class="modal-title" id="employeeModalLabel">
+              Employee Details
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body px-4 pb-4">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="position-relative">
+                  <img
+                    id="employeeModalImage"
+                    src=""
+                    alt=""
+                    class="img-fluid rounded shadow-sm w-100"
+                    style="object-fit: cover; height: 300px"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 end-0 p-3 text-white"
+                    style="
+                      background: linear-gradient(
+                        transparent,
+                        rgba(0, 0, 0, 0.7)
+                      );
+                    "
+                  >
+                    <h4 id="employeeModalName" class="mb-1"></h4>
+                    <p id="employeeModalRole" class="mb-0 text-white-50"></p>
+                  </div>
                 </div>
-            </div>
-            <div class="modal-footer border-top-0 justify-content-between bg-light rounded-bottom">
-                <span class="text-muted" id="employeeCounter"></span>
-                <div class="arrows">
-                    <a class="prev text-decoration-none " onclick="navigateEmployee(-1)" id="prevEmployee" class="btn btn-primary d-flex align-items-center" style="display: visible;">&#10094;</a> 
-                    <a class="next text-decoration-none" onclick="navigateEmployee(1)" id="nextEmployee" class="btn btn-primary d-flex align-items-center" style="display: visible;">&#10095;</a>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3">
+                  <h6 class="text-primary mb-3">Achievements & Remarks</h6>
+                  <p id="employeeModalDescription" class="text-muted"></p>
                 </div>
+              </div>
             </div>
+          </div>
+          <div
+            class="modal-footer border-top-0 justify-content-between bg-light rounded-bottom"
+          >
+            <span class="text-muted" id="employeeCounter"></span>
+            <div class="arrows">
+              <a
+                class="prev text-decoration-none"
+                onclick="navigateEmployee(-1)"
+                id="prevEmployee"
+                class="btn btn-primary d-flex align-items-center"
+                style="display: visible"
+                >&#10094;</a
+              >
+              <a
+                class="next text-decoration-none"
+                onclick="navigateEmployee(1)"
+                id="nextEmployee"
+                class="btn btn-primary d-flex align-items-center"
+                style="display: visible"
+                >&#10095;</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="offcanvas offcanvas-end" tabindex="-1" id="quickLinksMenu" aria-labelledby="quickLinksMenuLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="quickLinksMenuLabel">Quick Links</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body sideMnu">
-    <ul class="list-group">
-      <li class="list-group-item"><a href="https://www.google.com/" class="text-decoration-none">📅 Meeting</a></li>
-      <li class="list-group-item"><a href="https://www.google.com/" class="text-decoration-none">📆 Calendar</a></li>
-      <li class="list-group-item"><a href="https://www.google.com/" class="text-decoration-none">📝 Notes</a></li>
-      <li class="list-group-item"><a href="https://www.google.com/" class="text-decoration-none">Sample 1</a></li>
-      <li class="list-group-item"><a href="https://www.google.com/" class="text-decoration-none">Sample 2</a></li>
-    </ul>
-  </div>
-</div>
+    
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="quickLinksMenu"
+      aria-labelledby="quickLinksMenuLabel"
+    >
+      <div class="offcanvas-header">
+        <!-- <h5 class="offcanvas-title" id="quickLinksMenuLabel">Quick Links</h5> -->
+        <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+        <div class="blue-bar">Quick Links</div>
+      </div>
 
-<script src="js/config.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/app.js"></script> 
-    </body>
+      <div class="offcanvas-body sideMnu">
+
+        <div class="list-group">
+          <h6>Zoho People</h6>
+          <ul class="list-group">
+
+        <!-- this shld be added dynamically -->
+        <li class="list-group-item">
+            <a href="Zoho People-https://people.zoho.com/excelife/zp">Zoho People</a>
+        </li>   
+        <!-- this shld be added dynamically -->
+
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>Book Conference Room</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="Meeting Room Booking-http://mrbs.excelindia.com/mrbs/">Conference Room</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>Timesheet</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="Timesheet-http://timesheet.excelindia.com/">View Timesheet</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>Helpdesk</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a
+                href="https://helpdesk.excelindia.com/HelpDesk/#/loginpage">IT Helpdesk (Mysore, Noida and Hyderabad)</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#">HR, Admin, DevOps/Release Engineering (Mysore)</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>Corporate Identity</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="#">Logo Usage / Guidelines document</a>
+            </li>
+            <li class="list-group-item"><a href="#">Download Logo files</a></li>
+            <li class="list-group-item">
+              <a href="#">Download Corporate PPT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>ES-Corporate Travel Management</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a
+                href="ES Corporate Travel-https://travel.excelindia.com/ES-CTM/login.aspx">ES-Corporate Travel Management</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>ExceLearn</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a
+                href="https://www.excelearn.enabled.live/">ExceLearn Homepage</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-group">
+          <h6>Group Mediclaim</h6>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="#">Group Mediclaim Guidelines</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>

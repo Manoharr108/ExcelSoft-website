@@ -202,29 +202,113 @@ color: rgba(255, 255, 255, 1.00);
   animation: fadeIn 0.9s;
 }
 
-.sideMnu{
-  height: 100% !important;
-  overflow: auto !important;
+/* Quick Links Header */
+.blue-bar {
+    background-color: #379aff; /* Bright blue */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
 }
+
+/* Scrollable Side Menu */
+.sideMnu {
+    height: 100% !important;
+    overflow-y: auto !important;
+    background-color: #f5f5f5; /* Light grey background like the image */
+    padding: 10px;
+}
+
+/* Scrollbar Styling */
 .sideMnu::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
+
 .sideMnu::-webkit-scrollbar-track {
-  background: #fff;
+    background: #fff;
 }
 
 .sideMnu::-webkit-scrollbar-thumb {
-  background: #666666;
+    background: #aaa; /* Lighter scrollbar thumb */
+    border-radius: 5px;
 }
 
+/* List Group Items */
+.sideMnu .list-group-item {
+    background-color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Link Styling */
+.sideMnu .list-group-item a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    display: block;
+}
+
+.sideMnu .list-group-item a:hover {
+    text-decoration: underline;
+}
+
+/* Group Title Styling */
+.sideMnu h6 {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.sideMnu h6::before {
+    content: '➤';
+    color: #379aff;
+    margin-right: 8px;
+}
+
+/* Spacing between groups */
+.sideMnu .list-group {
+    margin-bottom: 12px;
+}
+
+/* Bullet/Icons inside the list */
+/* .sideMnu .list-group-item a::before {
+    content: '👉🏻';
+    color: #379aff;
+    margin-right: 8px;
+} */
 /* Make hamburger icon white */
 .custom-toggler-white {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+} 
+
+.offcanvas {
+    height: 100vh !important;
+    overflow-y: auto !important;
+}
+
+.offcanvas-body {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    padding: 10px;
+}
+
+.sideMnu {
+    max-height: calc(100vh - 50px); /* Adjust if header exists */
+    overflow-y: auto !important;
 }
 
 /* Optional: Improve dropdown spacing on mobile */
 @media (max-width: 767.98px) {
   #quarter-dropdown {
-    width: 100%;
+    width: 74%;
   }
 }
