@@ -1,9 +1,8 @@
-
 let categoryWinners = {
-    'pob-winners': [],
     'mvp-winners': [],
+    'exl-winners': [],
     'em-winners': [],
-    'exl-winners': []
+    'pob-winners': []
 };
 
 let currentCategory = '';
@@ -66,7 +65,7 @@ function populateQuarterDropdown(quarters) {
 
 async function fetchEmployeesForAllCategories(quarter) {
     showLoader();
-    const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
+    const categories = [ 'Most valuable Player', 'Extra Miler', 'Excelearn','Pat on the back'];
     document.getElementById("active-quarter").innerHTML = `<div id="active-quarter">${quarter}</div>`;
     
     categories.forEach(category => {
@@ -88,7 +87,7 @@ function fetchEmployeesByQuarter(quarter) {
     showLoader();
     resetToFirstTab();
 
-    const categories = ['Pat on the back', 'Most valuable Player', 'Excelearn', 'Extra Miler'];
+    const categories = [ 'Most valuable Player', 'Extra Miler', 'Excelearn','Pat on the back'];
     document.getElementById('active-quarter').value = "quarter";
     categories.forEach(category => {
         fetch(`http://localhost:9000/emp/${category}/${quarter}`)
@@ -119,20 +118,20 @@ function resetToFirstTab() {
 
 function getCategoryContainerId(category) {
     switch (category) {
-        case 'Pat on the back': return 'pob-winners';
         case 'Most valuable Player': return 'mvp-winners';
         case 'Extra Miler': return 'em-winners';
         case 'Excelearn': return 'exl-winners';
+        case 'Pat on the back': return 'pob-winners';
         default: return null;
     }
 }
 
 function getCategoryTitle(containerId) {
     switch (containerId) {
-        case 'pob-winners': return 'Pat on the Back';
         case 'mvp-winners': return 'Most Valuable Player';
         case 'em-winners': return 'Extra Miler';
         case 'exl-winners': return 'Excelearn';
+        case 'pob-winners': return 'Pat on the Back';
         default: return 'Employee Details';
     }
 }
@@ -217,3 +216,65 @@ document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowRight') navigateEmployee(1);
     }
 });
+
+async function fetchQuickLinks() {
+    SetLoading(true);
+    try {
+        let res = await fetch('http://localhost:9000/quicklinks'); // Replace with your API endpoint
+        let data = await res.json();
+        appendQuickLinks(data);
+    } catch (err) {
+        console.error('Error fetching quick links', err);
+        alert('Error fetching quick links.');
+    } finally {
+        SetLoading(false);
+    }
+}
+
+function SetLoading(isLoading) {
+    const loader = document.getElementById('loader');
+    if (isLoading) {
+        loader.classList.remove('d-none');
+    } else {
+        loader.classList.add('d-none');
+    }
+}
+
+function appendQuickLinks(data) {
+    const menuContainer = document.querySelector('.offcanvas-body.sideMnu');
+    menuContainer.innerHTML = ''; // Clear old content to prevent duplicates
+
+    data.forEach(section => {
+        const publicLinks = section.links.filter(link => link.epublic);
+        if (publicLinks.length === 0) return;
+
+        let listGroup = document.createElement('div');
+        listGroup.className = 'list-group mb-4';
+
+        let heading = document.createElement('h6');
+        heading.textContent = section.category;
+
+        let ul = document.createElement('ul');
+        ul.className = 'list-group';
+
+        publicLinks.forEach(link => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.textContent = link.name;
+            a.target = '_blank'; // Open in new tab
+
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+
+        listGroup.appendChild(heading);
+        listGroup.appendChild(ul);
+        menuContainer.appendChild(listGroup);
+    });
+}
+
+// Optional: Fetch quick links immediately when page loads
+window.addEventListener('DOMContentLoaded', fetchQuickLinks);

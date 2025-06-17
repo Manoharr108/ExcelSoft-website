@@ -28,9 +28,9 @@
                 />
               </a>
               <div class="text-white border-start ps-2 ms-1 d-flex flex-column">
-                <span class="fs-5 fs-md-3 fs-lg-2 fs-xl-1 fw-semibold"
-                  >Rewards and Recognition Award Winners</span
-                >
+                <span class="fs-5 fs-md-3 fs-lg-2 fs-xl-1 fw-semibold">
+                  Rewards and Recognition Award Winners
+                </span>
                 <div id="active-quarter" onclick="play()">quarter</div>
               </div>
             </div>
@@ -49,18 +49,6 @@
                 <li class="nav-item" role="presentation">
                   <button
                     class="nav-link active"
-                    id="pob-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#pob-tab-pane"
-                    type="button"
-                    role="tab"
-                  >
-                    Pat on the Back
-                  </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button
-                    class="nav-link"
                     id="mvp-tab"
                     data-bs-toggle="tab"
                     data-bs-target="#mvp-tab-pane"
@@ -92,6 +80,18 @@
                     role="tab"
                   >
                     ExceLearn
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="pob-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#pob-tab-pane"
+                    type="button"
+                    role="tab"
+                  >
+                    Pat on the Back
                   </button>
                 </li>
               </ul>
@@ -126,37 +126,9 @@
       </section>
 
       <div class="container-fluid tab-content pb-5" id="myTabContent">
-        <!-- Pat on the Back Tab -->
-        <div
-          class="tab-pane fade show active"
-          id="pob-tab-pane"
-          role="tabpanel"
-          aria-labelledby="pob-tab"
-          tabindex="0"
-        >
-          <div class="pob-container">
-            <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
-              The Pat on the Back (POB) is given in recognition of the best
-              performer in each Business Unit. It recognizes the effort made by
-              the individual during a task or project.
-            </p>
-            <p class="text-center display-6 mb-3">
-              Congratulations to the winners of "Pat on the Back Award"
-            </p>
-
-            <!-- Dynamic content will be injected here -->
-            <div
-              class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
-              id="pob-winners"
-            >
-              <!-- Cards will be injected using JavaScript -->
-            </div>
-          </div>
-        </div>
-
         <!-- Most Valuable Player Tab -->
         <div
-          class="tab-pane fade"
+          class="tab-pane fade show active"
           id="mvp-tab-pane"
           role="tabpanel"
           aria-labelledby="mvp-tab"
@@ -196,13 +168,10 @@
               Congratulations to the winners of "Extra Miler Award"
             </p>
 
-            <!-- Dynamic content will be injected here -->
             <div
               class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
               id="em-winners"
-            >
-              <!-- Cards will be injected using JavaScript -->
-            </div>
+            ></div>
           </div>
         </div>
 
@@ -223,13 +192,35 @@
               Congratulations to the winners of "ExceLearn Award"
             </p>
 
-            <!-- Dynamic content will be injected here -->
             <div
               class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
               id="exl-winners"
-            >
-              <!-- Cards will be injected using JavaScript -->
-            </div>
+            ></div>
+          </div>
+        </div>
+
+        <!-- Pat on the Back Tab -->
+        <div
+          class="tab-pane fade"
+          id="pob-tab-pane"
+          role="tabpanel"
+          aria-labelledby="pob-tab"
+          tabindex="0"
+        >
+          <div class="pob-container">
+            <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+              The Pat on the Back (POB) is given in recognition of the best
+              performer in each Business Unit. It recognizes the effort made by
+              the individual during a task or project.
+            </p>
+            <p class="text-center display-6 mb-3">
+              Congratulations to the winners of "Pat on the Back Award"
+            </p>
+
+            <div
+              class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
+              id="pob-winners"
+            ></div>
           </div>
         </div>
       </div>
@@ -297,23 +288,23 @@
                 onclick="navigateEmployee(-1)"
                 id="prevEmployee"
                 class="btn btn-primary d-flex align-items-center"
-                style="display: visible"
-                >&#10094;</a
               >
+                &#10094;
+              </a>
               <a
                 class="next text-decoration-none"
                 onclick="navigateEmployee(1)"
                 id="nextEmployee"
                 class="btn btn-primary d-flex align-items-center"
-                style="display: visible"
-                >&#10095;</a
               >
+                &#10095;
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div
       class="offcanvas offcanvas-end"
       tabindex="-1"
@@ -321,98 +312,11 @@
       aria-labelledby="quickLinksMenuLabel"
     >
       <div class="offcanvas-header">
-        <!-- <h5 class="offcanvas-title" id="quickLinksMenuLabel">Quick Links</h5> -->
-        <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
         <div class="blue-bar">Quick Links</div>
       </div>
 
       <div class="offcanvas-body sideMnu">
-
-        <div class="list-group">
-          <h6>Zoho People</h6>
-          <ul class="list-group">
-
-        <!-- this shld be added dynamically -->
-        <li class="list-group-item">
-            <a href="Zoho People-https://people.zoho.com/excelife/zp">Zoho People</a>
-        </li>   
-        <!-- this shld be added dynamically -->
-
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>Book Conference Room</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a href="Meeting Room Booking-http://mrbs.excelindia.com/mrbs/">Conference Room</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>Timesheet</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a href="Timesheet-http://timesheet.excelindia.com/">View Timesheet</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>Helpdesk</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a
-                href="https://helpdesk.excelindia.com/HelpDesk/#/loginpage">IT Helpdesk (Mysore, Noida and Hyderabad)</a>
-            </li>
-            <li class="list-group-item">
-              <a href="#">HR, Admin, DevOps/Release Engineering (Mysore)</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>Corporate Identity</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a href="#">Logo Usage / Guidelines document</a>
-            </li>
-            <li class="list-group-item"><a href="#">Download Logo files</a></li>
-            <li class="list-group-item">
-              <a href="#">Download Corporate PPT</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>ES-Corporate Travel Management</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a
-                href="ES Corporate Travel-https://travel.excelindia.com/ES-CTM/login.aspx">ES-Corporate Travel Management</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>ExceLearn</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a
-                href="https://www.excelearn.enabled.live/">ExceLearn Homepage</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="list-group">
-          <h6>Group Mediclaim</h6>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a href="#">Group Mediclaim Guidelines</a>
-            </li>
-          </ul>
-        </div>
+        <!-- this is where links are going to be appended -->
       </div>
     </div>
     <script src="js/config.js"></script>
