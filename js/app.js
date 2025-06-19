@@ -61,7 +61,24 @@ function populateQuarterDropdown(quarters) {
             dropdown.appendChild(option);
         }
     });
+
+    // Add the "more" option
+    const option = document.createElement('option');
+    option.value = "more";
+    option.text = "more";
+    dropdown.appendChild(option);
+
+    // Add onchange event to handle redirection
+    dropdown.onchange = function () {
+        if (this.value === "more") {
+            window.location.href = "https://es-homepage.excelindia.com/es-homepage/";
+        } else {
+            // Call your quarter selection handler here if needed
+            // console.log("Selected Quarter: " + this.value);
+        }
+    };
 }
+
 
 async function fetchEmployeesForAllCategories(quarter) {
     showLoader();
