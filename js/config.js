@@ -1,8 +1,8 @@
 // js/config.js
 const PHOTO_CONFIG = {
-  BASE_PATH: 'photos/',
-  DEFAULT_IMAGE: 'defimg.jpg',
-  EXTENSION: 'jpg'
+  BASE_PATH: 'http://localhost:9000/photos/',
+  DEFAULT_IMAGE: 'defimg.png',
+  EXTENSION: 'png'
 };
 
 function getEmployeePhotoUrl(empid) {
