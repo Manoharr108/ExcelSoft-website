@@ -31,23 +31,82 @@ function fetchEmployees() {
     showLoader();
     fetch('http://localhost:9000/achievers-employees')
         .then(response => response.json())
-        .then(data => { 
+        .then(data => {
             const employees = (data.emp || []).filter(emp => emp.epublic === true);
             const quarters = [...new Set(employees.map(emp => emp.quarter))];
-            
+
             quarters.sort((a, b) => {
                 const [yearA, quarterA] = a.split('Q');
                 const [yearB, quarterB] = b.split('Q');
                 return yearB - yearA || quarterB - quarterA;
-            });   
-            
-            const latestQuarter = quarters[0]; 
+            });
+
+            const latestQuarter = quarters[0];
+
+            // 🔥 Filter employees belonging to the latest quarter only
+            const latestQuarterEmployees = employees.filter(emp => emp.quarter === latestQuarter);
+
+            // 🔥 Extract categories from only the latest quarter employees
+            const categories = [...new Set(latestQuarterEmployees.map(emp => emp.category))];
+            // 👉 Dynamically extract categories
+
             populateQuarterDropdown(quarters);
-            fetchEmployeesForAllCategories(latestQuarter);
+            generateTabs(categories);
+            fetchEmployeesForAllCategories(latestQuarter, categories);
         })
         .catch(error => console.error('Error fetching employees:', error))
         .finally(() => hideLoader());
 }
+function generateTabs(categories) {
+    const tabsContainer = document.getElementById('myTab');
+    const tabContentContainer = document.getElementById('myTabContent');
+    
+    tabsContainer.innerHTML = '';
+    tabContentContainer.innerHTML = '';
+
+    categories.forEach((category, index) => {
+        const categoryId = category.toLowerCase().replace(/\s+/g, '-') + '-tab';
+        const paneId = category.toLowerCase().replace(/\s+/g, '-') + '-pane';
+
+        // Create tab
+        const li = document.createElement('li');
+        li.className = 'nav-item';
+        li.setAttribute('role', 'presentation');
+
+        const button = document.createElement('button');
+        button.className = `nav-link ${index === 0 ? 'active' : ''}`;
+        button.id = categoryId;
+        button.setAttribute('data-bs-toggle', 'tab');
+        button.setAttribute('data-bs-target', `#${paneId}`);
+        button.setAttribute('type', 'button');
+        button.setAttribute('role', 'tab');
+        button.innerText = category;
+
+        li.appendChild(button);
+        tabsContainer.appendChild(li);
+
+        // Create tab pane
+        const pane = document.createElement('div');
+        pane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+        pane.id = paneId;
+        pane.setAttribute('role', 'tabpanel');
+        pane.setAttribute('aria-labelledby', categoryId);
+
+        pane.innerHTML = `
+            <div class="${category.toLowerCase().replace(/\s+/g, '-')}-container">
+                <p class="small lh-sm opacity-75 text-center mt-4 mb-2">
+                    ${category} award winners.
+                </p>
+                <p class="text-center display-6 mb-3">
+                    Congratulations to the winners of "${category} Award"
+                </p>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center" id="${categoryId}-winners"></div>
+            </div>
+        `;
+        tabContentContainer.appendChild(pane);
+    });
+}
+
 
 function populateQuarterDropdown(quarters) {
     const dropdown = document.getElementById('quarter-dropdown');
@@ -80,19 +139,17 @@ function populateQuarterDropdown(quarters) {
 }
 
 
-async function fetchEmployeesForAllCategories(quarter) {
+async function fetchEmployeesForAllCategories(quarter, categories) {
     showLoader();
-    const categories = [ 'Most valuable Player', 'Extra Miler', 'Excelearn','Pat on the back'];
     document.getElementById("active-quarter").innerHTML = `<div id="active-quarter">${quarter}</div>`;
-    
+
     categories.forEach(category => {
         fetch(`http://localhost:9000/emp/${category}/${quarter}`)
             .then(response => response.json())
             .then(data => {
-                const employees = data;
-                let containerId = getCategoryContainerId(category);
+                const containerId = `${category.toLowerCase().replace(/\s+/g, '-')}-tab-winners`;
                 if (containerId) {
-                    populateWinners(employees, containerId);
+                    populateWinners(data, `${category.toLowerCase().replace(/\s+/g, '-')}-tab-winners`);
                 }
             })
             .catch(error => console.error(`Error fetching employees for ${category}:`, error))
@@ -100,24 +157,40 @@ async function fetchEmployeesForAllCategories(quarter) {
     });
 }
 
+
 function fetchEmployeesByQuarter(quarter) {
     showLoader();
-    resetToFirstTab();
 
-    const categories = [ 'Most valuable Player', 'Extra Miler', 'Excelearn','Pat on the back'];
-    document.getElementById('active-quarter').value = "quarter";
-    categories.forEach(category => {
-        fetch(`http://localhost:9000/emp/${category}/${quarter}`)
-            .then(response => response.json())
-            .then(data => {
-                const containerId = getCategoryContainerId(category);
-                if (containerId) {
-                    populateWinners(data, containerId);
-                }
-            })
-            .catch(error => console.error(`Error fetching employees for category "${category}" in quarter "${quarter}":`, error))
-            .finally(() => hideLoader());
-    });
+    // Fetch employees of the selected quarter
+    fetch(`http://localhost:9000/achievers-employees`)
+        .then(response => response.json())
+        .then(data => {
+            const employees = (data.emp || []).filter(emp => emp.epublic === true && emp.quarter === quarter);
+
+            const categories = [...new Set(employees.map(emp => emp.category))];
+
+            // 🔥 Clear old tabs and panes
+            clearTabsAndPanes();
+
+            // 🔥 Generate new tabs for the selected quarter
+            generateTabs(categories);
+
+            // 🔥 Fetch and display employees for the selected quarter and categories
+            fetchEmployeesForAllCategories(quarter, categories);
+
+            // 🔥 Reset the first tab as active
+            resetToFirstTab();
+        })
+        .catch(error => console.error('Error fetching employees:', error))
+        .finally(() => hideLoader());
+}
+
+function clearTabsAndPanes() {
+    const tabsContainer = document.getElementById('myTab');
+    const tabContentContainer = document.getElementById('myTabContent');
+
+    tabsContainer.innerHTML = '';
+    tabContentContainer.innerHTML = '';
 }
 
 function resetToFirstTab() {
@@ -157,31 +230,30 @@ function populateWinners(winners, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
 
-    categoryWinners[containerId] = winners.filter(winner => winner.name);
-
-    if (winners.length < 2) {   
+    if (winners.length < 1) {
         container.innerHTML = '<p class="text-center">No winners for this category.</p>';
         return;
     }
 
-    categoryWinners[containerId].forEach((winner, i) => {
-        if(winner.epublic){
+    winners.forEach((winner, i) => {
+        if (winner.epublic) {
             container.innerHTML += `
-            <div class="col">
-                <div class="card h-100" onclick="openEmployeeModal('${containerId}', ${i})">
-                    <img src="${getEmployeePhotoUrl(winner.empid)}"
-                         class="card-img-top" 
-                         alt="${winner.name}"
-                         onerror="this.src='${getDefaultPhotoUrl()}'" />
-                    <div class="card-body py-2">
-                        <h5 class="card-title">${winner.name}</h5>
-                        <p class="card-text mb-0"><small class="text-body-secondary">${winner.role}</small></p>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="${getEmployeePhotoUrl(winner.empid)}"
+                             class="card-img-top" 
+                             alt="${winner.name}"
+                             onerror="this.src='${getDefaultPhotoUrl()}'" />
+                        <div class="card-body py-2">
+                            <h5 class="card-title">${winner.name}</h5>
+                            <p class="card-text mb-0"><small class="text-body-secondary">${winner.role}</small></p>
+                        </div>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
         }
     });
 }
+
 
 function openEmployeeModal(containerId, index) {
     currentCategory = containerId;
